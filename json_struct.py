@@ -152,21 +152,19 @@ if __name__=="main":
         docContext = textSplit.split_text(str(genRow[3]))
         
         #Embed the data and then extract json from it
-        '''
-            parser = PydanticOutputParser(pydantic_object=Patient)
+        parser = PydanticOutputParser(pydantic_object=Patient)
 
-            prompt = PromptTemplate(
-                template="Answer the user query.\n{format_instructions}\n{query}\n",
-                input_variables=["patientData", "query", "contextData],
-                partial_variables={"format_instructions": parser.get_format_instructions()},
+        prompt = PromptTemplate(
+            template="Answer the user query.\n{format_instructions}\n{query}\n",
+            input_variables=["patientData", "query", "contextData],
+            partial_variables={"format_instructions": parser.get_format_instructions()},
             )
 
-            _input = prompt.format_prompt(query=medQuery, patientData=docPatient, contextData=docContext)
+        _input = prompt.format_prompt(query=medQuery, patientData=docPatient, contextData=docContext)
 
-            output = model(_input.to_string())
+        output = model(_input.to_string())
 
-            parser.parse(output)
-        '''
+        parser.parse(output)
     
     
     
