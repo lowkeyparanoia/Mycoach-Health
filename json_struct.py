@@ -105,7 +105,7 @@ def generatorRead(Path_csv: str) -> Iterator[list]:
             contextData = spacyPipe.to_dict()
             modRow.append(contextData)
 
-            yield modRow[2:]
+            yield modRow
             countRow += 1
 
 def chunkingFile(totalData: str, chunkSize: int):
@@ -140,15 +140,16 @@ if __name__=="main":
     )
 
     csvPath = r"C:\Users\jreno\Documents\Projects\Mycoach Health\NOTEEVENTS\NOTEEVENTS.csv.gz"
+    details = generatorRead(csvPath)
     
     #Add generator invocation here
     userInput = int(input("Enter how many records to generator: "))
     for i in range(userInput):
-        genRow = generatorRead(csvPath)
+        genRow = next(details)
         
         #Add chunking here
-        docPatient = textSplit.split_text(str(genRow[0]))
-        docContext = textSplit.split_text(str(genRow[1]))
+        docPatient = textSplit.split_text(str(genRow[2]))
+        docContext = textSplit.split_text(str(genRow[3]))
         
         #Embed the data and then extract json from it
         '''
